@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Formulario from '../components/Formulario.astro';
+import Preguntas from '../components/Preguntas.astro';
+import { euros } from '../lib/util';
+
+const importes = [30, 50, 80, 120];
+---
+
+<Base titulo="Bono regalo" descripcion="Regala una cita en Nuca con un bono de 30, 50, 80 o 120 euros, válido para cualquier servicio.">
+  <div class="contenedor cabecera-pagina">
+    <h1>Bono regalo</h1>
+    <p>Regala un rato para cuidarse. El bono sirve para cualquier servicio y se envía por correo o se recoge en el salón.</p>
+  </div>
+  <section class="seccion" style="padding-top:20px">
+    <div class="contenedor dos dos--desigual" style="align-items:start">
+      <div>
+        <div class="bono" style="margin-bottom:24px">
+          <h2>Un bono para quien tú quieras</h2>
+          <p class="importe num" id="bono-importe">{euros(importes[1])}</p>
+          <p style="max-width:36ch">Válido para cualquier servicio, durante seis meses.</p>
+        </div>
+        <ul class="lista">
+          <li>Lo eliges tú: de {euros(importes[0])} a {euros(importes[3])}.</li>
+          <li>Puede usarse en una o varias visitas.</li>
+          <li>Se puede acompañar de una nota personal.</li>
+        </ul>
+      </div>
+      <Formulario tipo="bono" boton="Pedir el bono" mensajeOk="Solicitud recibida. Te contactamos para confirmar el bono y cómo quieres recibirlo.">
+        <div class="ancho-total">
+          <fieldset>
+            <legend>Importe <span class="marca" aria-hidden="true">*</span></legend>
+            <div class="chips">
+              {importes.map((i, n) => <label><input type="radio" name="importe" value={i} checked={n === 1} /><span class="num">{euros(i)}</span></label>)}
+            </div>
+          </fieldset>
+        </div>
+        <div><label for="b-nombre">Tu nombre <span class="marca" aria-hidden="true">*</span></label><input id="b-nombre" name="nombre" type="text" autocomplete="name" required /><p class="error" data-error-para="nombre"></p></div>
+        <div><label for="b-email">Tu correo <span class="marca" aria-hidden="true">*</span></label><input id="b-email" name="email" type="email" autocomplete="email" required /><p class="error" data-error-para="email"></p></div>
+        <div class="ancho-total"><label for="b-para">¿Para quién es? (opcional)</label><input id="b-para" name="para" type="text" /></div>
+        <div class="ancho-total"><label for="b-nota">Nota personal (opcional)</label><textarea id="b-nota" name="nota" maxlength="200" style="min-height:90px"></textarea></div>
+      </Formulario>
+    </div>
+  </section>
+  <section class="seccion seccion--blanca"><div class="contenedor"><Preguntas tema="bono" titulo="Sobre el bono regalo" /></div></section>
+</Base>
+
+<script>
+  const radios = document.querySelectorAll<HTMLInputElement>('input[name="importe"]');
+  const salida = document.getElementById('bono-importe');
+  radios.forEach((r) => r.addEventListener('change', () => { if (salida) salida.textContent = `${r.value} €`; }));
+</script>

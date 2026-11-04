@@ -1,0 +1,35 @@
+{
+  "orden": 6,
+  "nombre": "Lob (bob largo)",
+  "largo": "medio",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "rizado",
+    "fino",
+    "grueso"
+  ],
+  "rostros": [
+    "ovalado",
+    "cuadrado",
+    "alargado",
+    "corazon"
+  ],
+  "mantenimiento": 8,
+  "duracion": 45,
+  "desde": 32,
+  "servicio": "corte-mujer",
+  "ilustracion": "lob",
+  "resumen": "Un bob que llega a la clavícula. Muy versátil: se lleva suelto, recogido o con ondas.",
+  "queEs": "El lob, de «long bob», es un bob más largo, entre la barbilla y los hombros. Es una de las alternativas más cómodas si quieres cambiar sin cortar mucho: permite recoger el pelo y sigue siendo fácil de peinar.",
+  "comoPedirlo": [
+    "Pide «lob a la altura de la clavícula».",
+    "Indica si quieres puntas rectas o desfiladas.",
+    "Di si prefieres la parte delantera algo más larga."
+  ],
+  "enCasa": [
+    "Va bien con secado natural en cabellos ondulados.",
+    "Un spray de sal marina da textura sin esfuerzo.",
+    "Se repasa cada ocho semanas aproximadamente."
+  ]
+}

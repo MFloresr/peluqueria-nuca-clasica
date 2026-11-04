@@ -1,0 +1,42 @@
+---
+import { menu } from '../lib/sitio';
+interface Props { ruta: string }
+const { ruta } = Astro.props;
+const actual = (href: string) => (ruta === href || (href !== '/' && ruta.startsWith(href)) ? 'page' : undefined);
+const sinCita = menu.filter((m) => m.href !== '/cita/');
+---
+
+<header class="cabecera">
+  <div class="contenedor cabecera__fila">
+    <a class="logo" href="/" translate="no">Nuca<i>.</i><span class="solo-lectores"> peluquería y barbería, ir al inicio</span></a>
+    <nav class="nav" aria-label="Principal">
+      <ul>
+        {sinCita.map((m) => <li><a href={m.href} aria-current={actual(m.href)}>{m.texto}</a></li>)}
+      </ul>
+    </nav>
+    <div class="cabecera__acciones">
+      <a class="btn btn--peq cabecera__cita" href="/cita/">Pedir cita</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir el menú"><span></span></button>
+    </div>
+  </div>
+  <div class="menu-movil" id="menu-movil">
+    <ul>
+      <li><a href="/cita/">Pedir cita</a></li>
+      {sinCita.map((m) => <li><a href={m.href} aria-current={actual(m.href)}>{m.texto}</a></li>)}
+      <li><a href="/contacto/">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const boton = document.querySelector<HTMLButtonElement>('.burger');
+  const menu = document.getElementById('menu-movil');
+  boton?.addEventListener('click', () => {
+    const abierto = menu!.classList.toggle('abierto');
+    boton.setAttribute('aria-expanded', String(abierto));
+    boton.setAttribute('aria-label', abierto ? 'Cerrar el menú' : 'Abrir el menú');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('abierto')) { menu.classList.remove('abierto'); boton?.setAttribute('aria-expanded', 'false'); boton?.focus(); }
+  });
+</script>

@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Preguntas from '../components/Preguntas.astro';
+import { getServicios } from '../lib/contenido';
+import { CATEGORIAS } from '../content.config';
+import { NOMBRE_CATEGORIA, euros, duracion } from '../lib/util';
+
+const servicios = await getServicios();
+---
+
+<Base titulo="Servicios y precios" descripcion="Cortes, barbería, color, tratamientos y peinados con precio y duración. Reserva el que quieras online.">
+  <div class="contenedor cabecera-pagina">
+    <h1>Servicios y precios</h1>
+    <p>Todo con su precio y su duración, para que sepas qué cuesta y cuánto dura antes de pedir cita.</p>
+  </div>
+  <section class="seccion" style="padding-top:20px">
+    <div class="contenedor">
+      <div class="servicios-lista">
+        {CATEGORIAS.map((c) => (
+          <section class="categoria" aria-labelledby={`c-${c}`}>
+            <h2 id={`c-${c}`}>{NOMBRE_CATEGORIA[c]}</h2>
+            {servicios.filter((s) => s.data.categoria === c).map((s) => (
+              <div class="servicio-fila">
+                <h3>{s.data.nombre} <span class="gris num" style="font-weight:500;font-size:0.95rem">· {duracion(s.data.duracion)}</span></h3>
+                <span class="precio num">{s.data.desde && <small>desde</small>}{euros(s.data.precio)}</span>
+                <p>{s.data.descripcion}</p>
+                <a class="enlace" href={`/cita/?servicio=${s.id}`}>Reservar</a>
+              </div>
+            ))}
+          </section>
+        ))}
+      </div>
+      <p class="letra-pequena" style="margin-top:24px;max-width:70ch">Precios con IVA incluido. Los servicios con «desde» dependen de la longitud y de lo que quieras conseguir: te damos el precio final en la consulta, antes de empezar.</p>
+    </div>
+  </section>
+  <section class="seccion seccion--blanca"><div class="contenedor"><Preguntas tema="color" titulo="Sobre el color" /></div></section>
+</Base>

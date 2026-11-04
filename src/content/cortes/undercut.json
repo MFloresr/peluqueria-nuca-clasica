@@ -1,0 +1,32 @@
+{
+  "orden": 4,
+  "nombre": "Undercut",
+  "largo": "medio",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "grueso"
+  ],
+  "rostros": [
+    "ovalado",
+    "redondo",
+    "cuadrado"
+  ],
+  "mantenimiento": 3,
+  "duracion": 40,
+  "desde": 22,
+  "servicio": "corte-hombre",
+  "ilustracion": "undercut",
+  "resumen": "Los lados muy cortos, sin degradar, y arriba largo. Un contraste claro que se puede llevar suelto o recogido.",
+  "queEs": "En el undercut, los lados y la nuca se rapan o se dejan muy cortos de forma uniforme, y arriba se mantiene longitud. A diferencia del degradado, no hay transición gradual: el cambio es marcado.",
+  "comoPedirlo": [
+    "Pide «undercut» y el largo de los lados, por ejemplo «a 3 mm».",
+    "Indica hasta dónde sube lo rapado: «hasta la altura de la oreja» o más arriba.",
+    "Di cuánto largo quieres arriba."
+  ],
+  "enCasa": [
+    "Se puede peinar hacia atrás, hacia un lado o recogerlo.",
+    "Los lados necesitan retoque pronto para que no se note el crecimiento.",
+    "Usa un poco de producto para dar forma a la parte larga."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "orden": 5,
+  "nombre": "Bob",
+  "largo": "medio",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "fino"
+  ],
+  "rostros": [
+    "ovalado",
+    "redondo",
+    "corazon"
+  ],
+  "mantenimiento": 7,
+  "duracion": 45,
+  "desde": 32,
+  "servicio": "corte-mujer",
+  "ilustracion": "bob",
+  "resumen": "Una línea limpia a la altura de la mandíbula. Da cuerpo al pelo fino y se arregla en minutos.",
+  "queEs": "El bob es un corte recto a la altura de la mandíbula o la barbilla. Puede llevarse con raya al medio o al lado, y con la línea recta o ligeramente en ángulo. Da sensación de densidad en cabellos finos.",
+  "comoPedirlo": [
+    "Indica la altura exacta: «a la barbilla» o «a la mandíbula».",
+    "Di si quieres la línea recta, o más larga por delante.",
+    "Cuéntanos si te gusta con raya al medio o al lado, y si llevarás flequillo."
+  ],
+  "enCasa": [
+    "Se seca bien con secador y cepillo redondo.",
+    "Una plancha rápida da más definición.",
+    "Para mantener la línea limpia, conviene repasarlo cada seis a ocho semanas."
+  ]
+}

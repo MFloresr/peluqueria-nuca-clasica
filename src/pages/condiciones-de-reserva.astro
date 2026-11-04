@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { sitio } from '../lib/sitio';
+---
+
+<Base titulo="Condiciones de reserva" descripcion="Cómo funcionan las citas: confirmación, cambios, cancelaciones y retrasos." noindex>
+  <div class="contenedor cabecera-pagina"><h1>Condiciones de reserva</h1></div>
+  <section class="seccion legal" style="padding-top:8px">
+    <div class="contenedor">
+      <p class="aviso aviso--demo" style="max-width:72ch">Plantilla de ejemplo. El cliente fija sus propias normas y su asesor las revisa antes de publicar.</p>
+      <h2>Cómo se reserva</h2>
+      <p>Al enviar el formulario de cita nos pides un hueco; la cita queda confirmada cuando te respondemos por teléfono o mensaje. Hasta entonces, el horario puede cambiar si hay un imprevisto.</p>
+      <h2>Cambios y cancelaciones</h2>
+      <p>Puedes cambiar o cancelar tu cita gratis hasta {sitio.cita.cancelacionHoras} horas antes, llamando o escribiendo al {sitio.telefonoVisible}. Después de ese plazo podemos pedirte un importe por el tiempo reservado. [El cliente decide esta política.]</p>
+      <h2>Retrasos</h2>
+      <p>Esperamos hasta 15 minutos. Si llegas más tarde, adaptamos el servicio al tiempo disponible o te proponemos otro hueco.</p>
+      <h2>Precios y duración</h2>
+      <p>Los precios incluyen IVA. Los servicios marcados con «desde» dependen de la longitud y del trabajo; te damos el precio final antes de empezar. La duración es orientativa.</p>
+      <h2>Bonos regalo</h2>
+      <p>Valen para cualquier servicio durante seis meses desde la compra, no se canjean por dinero y se pueden usar en varias visitas.</p>
+    </div>
+  </section>
+</Base>

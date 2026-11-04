@@ -1,0 +1,32 @@
+{
+  "orden": 2,
+  "nombre": "Corte clásico a tijera",
+  "largo": "corto",
+  "cabello": [
+    "liso",
+    "ondulado"
+  ],
+  "rostros": [
+    "ovalado",
+    "redondo",
+    "cuadrado",
+    "alargado"
+  ],
+  "mantenimiento": 5,
+  "duracion": 30,
+  "desde": 18,
+  "servicio": "corte-hombre",
+  "ilustracion": "clasico",
+  "resumen": "Corto, con raya al lado y los costados recogidos. Un corte que nunca pasa de moda y se arregla con un peine.",
+  "queEs": "Un corte de siempre: los lados y la nuca se cortan con tijera y máquina suave, y arriba se deja un largo suficiente para peinarlo con raya. Se adapta a casi cualquier ocasión, del trabajo a una boda.",
+  "comoPedirlo": [
+    "Pide «corte clásico a tijera, con raya a la izquierda (o a la derecha)».",
+    "Di cómo quieres los costados: «a media oreja» o «por encima de la oreja».",
+    "Indica cuánto quieres dejar arriba."
+  ],
+  "enCasa": [
+    "Peina el pelo húmedo hacia el lado de la raya.",
+    "Un poco de producto ligero fija la forma.",
+    "Se mantiene bien durante unas cinco semanas."
+  ]
+}

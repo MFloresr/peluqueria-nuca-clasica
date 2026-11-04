@@ -1,0 +1,34 @@
+{
+  "orden": 1,
+  "nombre": "Degradado",
+  "largo": "corto",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "rizado",
+    "grueso"
+  ],
+  "rostros": [
+    "ovalado",
+    "cuadrado",
+    "redondo"
+  ],
+  "mantenimiento": 3,
+  "duracion": 40,
+  "desde": 22,
+  "servicio": "degradado",
+  "ilustracion": "degradado",
+  "resumen": "Los lados y la nuca van de muy cortos a más largos de forma gradual. Limpio, fácil de peinar y de mantener.",
+  "queEs": "El degradado, o fade en inglés, se hace con máquina: se parte de un largo muy corto abajo y se sube poco a poco hasta fundirse con la parte de arriba. Se puede hacer más alto o más bajo, y con la piel visible o sin ella.",
+  "comoPedirlo": [
+    "Pide el degradado «alto», «medio» o «bajo» según dónde quieras que empiece.",
+    "Indica el largo mínimo, por ejemplo «a 1 mm» o «a 2 mm».",
+    "Di cuánto quieres dejar arriba, en centímetros.",
+    "Si quieres el contorno marcado, pide «acabado a navaja»."
+  ],
+  "enCasa": [
+    "Cepilla o peina el pelo largo de arriba con un poco de cera o pasta.",
+    "Hidrata la piel de la zona rapada si te tira.",
+    "Pide cita para el retoque cuando notes que el degradado se pierde."
+  ]
+}

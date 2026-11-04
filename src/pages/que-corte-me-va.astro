@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Ilustracion from '../components/Ilustracion.astro';
+import { getCortes } from '../lib/contenido';
+import { CABELLOS, LARGOS, ROSTROS } from '../content.config';
+import { NOMBRE_CABELLO, NOMBRE_LARGO, NOMBRE_ROSTRO, euros, semanas } from '../lib/util';
+
+const cortes = await getCortes();
+const datos = cortes.map((c) => ({ id: c.id, nombre: c.data.nombre, resumen: c.data.resumen, largo: c.data.largo, cabello: c.data.cabello, rostros: c.data.rostros, mant: c.data.mantenimiento, desde: c.data.desde }));
+---
+
+<Base titulo="¿Qué corte me va? Cuestionario" descripcion="Responde cuatro preguntas sobre tu pelo y tu rutina y te sugerimos tres cortes. Orientativo: la última palabra la tiene la consulta con tu profesional.">
+  <div class="contenedor cabecera-pagina">
+    <h1>¿Qué corte me va?</h1>
+    <p>Cuatro preguntas sobre tu pelo y tu rutina, y te sugerimos tres cortes. Es una orientación: en la peluquería lo afinamos contigo.</p>
+  </div>
+  <section class="seccion" style="padding-top:20px">
+    <div class="contenedor test" id="test" data-cortes={JSON.stringify(datos)}>
+      <form id="form-test" onsubmit="return false" class="formulario">
+        <fieldset class="pregunta-test">
+          <legend>1. ¿Cómo es tu cabello?</legend>
+          <div class="chips">{CABELLOS.map((c) => <label><input type="radio" name="cabello" value={c} /><span>{NOMBRE_CABELLO[c]}</span></label>)}</div>
+        </fieldset>
+        <fieldset class="pregunta-test">
+          <legend>2. ¿Qué largo te apetece?</legend>
+          <div class="chips">{LARGOS.map((l) => <label><input type="radio" name="largo" value={l} /><span>{NOMBRE_LARGO[l]}</span></label>)}<label><input type="radio" name="largo" value="" checked /><span>Me da igual</span></label></div>
+        </fieldset>
+        <fieldset class="pregunta-test">
+          <legend>3. ¿Cuánto tiempo quieres dedicar al peinado cada día?</legend>
+          <div class="chips">
+            <label><input type="radio" name="tiempo" value="poco" /><span>Casi nada</span></label>
+            <label><input type="radio" name="tiempo" value="medio" checked /><span>Unos minutos</span></label>
+            <label><input type="radio" name="tiempo" value="mucho" /><span>Me gusta arreglarme</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="pregunta-test">
+          <legend>4. ¿Cada cuánto puedes ir a la peluquería?</legend>
+          <div class="chips">
+            <label><input type="radio" name="visitas" value="4" /><span>Cada mes</span></label>
+            <label><input type="radio" name="visitas" value="8" checked /><span>Cada dos meses</span></label>
+            <label><input type="radio" name="visitas" value="12" /><span>Cada tres meses o más</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="pregunta-test" style="margin-bottom:0">
+          <legend>Opcional: la forma de tu rostro</legend>
+          <div class="chips"><label><input type="radio" name="rostro" value="" checked /><span>No lo sé</span></label>{ROSTROS.map((r) => <label><input type="radio" name="rostro" value={r} /><span>{NOMBRE_ROSTRO[r]}</span></label>)}</div>
+        </fieldset>
+        <p class="error" id="t-error" role="alert" style="color:var(--peligro);margin:14px 0 0"></p>
+        <button class="btn" type="button" id="t-ver" style="margin-top:12px">Ver mis cortes</button>
+      </form>
+
+      <div id="resultados-test" class="resultados-test" aria-live="polite" tabindex="-1"></div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  type C = { id: string; nombre: string; resumen: string; largo: string; cabello: string[]; rostros: string[]; mant: number; desde: number };
+  const raiz = document.getElementById('test')!;
+  const cortes: C[] = JSON.parse(raiz.dataset.cortes || '[]');
+  const form = document.getElementById('form-test') as HTMLFormElement;
+  const val = (n: string) => form.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`)?.value ?? '';
+  const eur = (n: number) => `${n} €`;
+  const MANTENIMIENTO_BAJO = new Set(['capas', 'rizos', 'lob', 'cortina']);
+  document.getElementById('t-ver')!.addEventListener('click', () => {
+    const cabello = val('cabello'), largo = val('largo'), tiempo = val('tiempo'), visitas = Number(val('visitas')), rostro = val('rostro');
+    const err = document.getElementById('t-error')!;
+    if (!cabello) { err.textContent = 'Elige cómo es tu cabello para poder sugerirte cortes.'; form.querySelector<HTMLInputElement>('input[name="cabello"]')?.focus(); return; }
+    err.textContent = '';
+    const puntuar = (c: C) => {
+      let p = 0;
+      if (c.cabello.includes(cabello)) p += 5; else p -= 3;
+      if (largo) p += c.largo === largo ? 3 : -1;
+      if (c.mant <= visitas) p += 3; else p -= Math.min(4, (c.mant - visitas) * 0.6);
+      if (tiempo === 'poco' && ['pixie', 'clasico', 'degradado', 'lob', 'capas'].includes(c.id)) p += 2;
+      if (tiempo === 'mucho' && ['tupe', 'bob', 'cortina', 'undercut'].includes(c.id)) p += 1.5;
+      if (rostro) p += c.rostros.includes(rostro) ? 1.5 : 0;
+      return p;
+    };
+    const top = [...cortes].sort((a, b) => puntuar(b) - puntuar(a)).slice(0, 3);
+    const cont = document.getElementById('resultados-test')!;
+    cont.innerHTML = `<h2 style="font-size:1.8rem;margin:0">Tus tres cortes</h2>` + top.map((c, i) => `
+      <article class="corte" style="flex-direction:row;align-items:stretch">
+        <div style="width:34%;min-width:120px" data-ilus="${c.id}"></div>
+        <div class="corte__cuerpo"><div class="corte__etiquetas"><span class="etiqueta etiqueta--violeta">Opción ${i + 1}</span><span class="etiqueta">Retoque cada ${c.mant} semanas</span></div>
+        <h3><a href="/cortes/${c.id}/">${c.nombre}</a></h3><p>${c.resumen}</p><div class="corte__pie"><span class="num">Desde ${eur(c.desde)}</span><a class="enlace" href="/cortes/${c.id}/">Ver el corte</a></div></div>
+      </article>`).join('') + `<p class="letra-pequena">Orientación general basada en lo que nos cuentas. En la consulta valoramos tu cabello real, su densidad y la forma de tu cara. <a class="enlace" href="/cita/">Pide cita</a> y lo vemos contigo.</p>`;
+    // Las ilustraciones se copian de la guía oculta
+    cont.querySelectorAll<HTMLElement>('[data-ilus]').forEach((el) => { const s = document.querySelector(`#plantillas [data-id="${el.dataset.ilus}"] svg`); if (s) el.appendChild(s.cloneNode(true)); });
+    cont.focus(); cont.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  void MANTENIMIENTO_BAJO;
+</script>
+
+<div id="plantillas" hidden>
+  {cortes.map((c) => <div data-id={c.id}><Ilustracion id={c.data.ilustracion} /></div>)}
+</div>

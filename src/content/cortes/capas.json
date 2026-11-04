@@ -1,0 +1,35 @@
+{
+  "orden": 8,
+  "nombre": "Capas largas",
+  "largo": "largo",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "rizado",
+    "grueso"
+  ],
+  "rostros": [
+    "ovalado",
+    "redondo",
+    "cuadrado",
+    "alargado",
+    "corazon"
+  ],
+  "mantenimiento": 10,
+  "duracion": 55,
+  "desde": 36,
+  "servicio": "corte-mujer",
+  "ilustracion": "capas",
+  "resumen": "Pelo largo con capas que dan movimiento y quitan peso. Conserva el largo y mejora la forma.",
+  "queEs": "Las capas son cortes a distintas alturas que dan movimiento y reducen el volumen en cabellos gruesos, o aportan cuerpo en los finos. Se puede conservar casi todo el largo y mejorar la forma de las puntas.",
+  "comoPedirlo": [
+    "Indica cuánto largo quieres conservar.",
+    "Di si prefieres capas suaves, casi invisibles, o muy marcadas.",
+    "Cuéntanos si quieres más volumen o menos peso."
+  ],
+  "enCasa": [
+    "Seca con difusor o al aire para respetar el movimiento.",
+    "Un aceite ligero en las puntas evita que se abran.",
+    "Se puede espaciar la visita hasta diez o doce semanas."
+  ]
+}

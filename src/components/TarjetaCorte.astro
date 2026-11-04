@@ -1,0 +1,27 @@
+---
+import Ilustracion from './Ilustracion.astro';
+import { euros, duracion, semanas, NOMBRE_LARGO, NOMBRE_CABELLO, type Corte } from '../lib/util';
+
+interface Props { corte: Corte }
+const { corte } = Astro.props;
+const d = corte.data;
+---
+
+<article
+  class="corte"
+  data-corte
+  data-largo={d.largo}
+  data-cabello={d.cabello.join(' ')}
+  data-mant={d.mantenimiento}
+>
+  <div class="corte__ilus"><Ilustracion id={d.ilustracion} /></div>
+  <div class="corte__cuerpo">
+    <div class="corte__etiquetas">
+      <span class="etiqueta etiqueta--cobre">{NOMBRE_LARGO[d.largo]}</span>
+      <span class="etiqueta">Retoque {semanas(d.mantenimiento)}</span>
+    </div>
+    <h3><a href={`/cortes/${corte.id}/`}>{d.nombre}</a></h3>
+    <p>{d.resumen}</p>
+    <div class="corte__pie"><span class="num">Desde {euros(d.desde)}</span><span class="gris num">{duracion(d.duracion)}</span></div>
+  </div>
+</article>

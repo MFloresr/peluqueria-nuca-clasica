@@ -1,0 +1,6 @@
+[
+  { "id": "carla", "nombre": "Carla Mena", "cargo": "Directora", "especialidad": "Color y corte de mujer", "texto": "Lleva veinte años con el color. Antes de teñir, mira tu cabello y te dice con franqueza qué te conviene.", "categorias": ["corte", "color", "tratamientos", "peinado"] },
+  { "id": "dani", "nombre": "Dani Ruiz", "cargo": "Barbero", "especialidad": "Degradados y barba", "texto": "Se pasa el día entre navajas y máquinas. Si quieres un degradado limpio, es tu persona.", "categorias": ["corte", "barberia"] },
+  { "id": "noa", "nombre": "Noa Prats", "cargo": "Estilista", "especialidad": "Rizos y tratamientos", "texto": "Corta el rizo en seco y a su altura. Se lo explica a quien nunca ha sabido qué hacer con el suyo.", "categorias": ["corte", "tratamientos", "color"] },
+  { "id": "ibai", "nombre": "Ibai Costa", "cargo": "Estilista", "especialidad": "Peinados y recogidos", "texto": "Prepara bodas y fiestas. Hace una prueba antes del día grande, y eso se nota.", "categorias": ["corte", "peinado"] }
+]

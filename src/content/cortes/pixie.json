@@ -1,0 +1,32 @@
+{
+  "orden": 7,
+  "nombre": "Pixie",
+  "largo": "corto",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "fino"
+  ],
+  "rostros": [
+    "ovalado",
+    "corazon",
+    "alargado"
+  ],
+  "mantenimiento": 5,
+  "duracion": 40,
+  "desde": 32,
+  "servicio": "corte-mujer",
+  "ilustracion": "pixie",
+  "resumen": "Muy corto, con textura arriba y algo más de largo en el flequillo. Atrevido y de peinado casi instantáneo.",
+  "queEs": "El pixie es un corte muy corto, con los lados y la nuca limpios y algo más de longitud arriba y por delante. Se puede llevar con textura, peinado hacia un lado o hacia atrás. Destaca la cara y el cuello.",
+  "comoPedirlo": [
+    "Pide el pixie y el largo del flequillo, por ejemplo «hasta la ceja».",
+    "Di si lo quieres con textura despeinada o más pulido.",
+    "Indica cómo quieres la nuca: limpia o con algo de largo."
+  ],
+  "enCasa": [
+    "Se peina en un minuto con un poco de cera o crema.",
+    "Necesita retoques frecuentes para mantener la forma.",
+    "Si te cansa, crece de forma bastante uniforme."
+  ]
+}

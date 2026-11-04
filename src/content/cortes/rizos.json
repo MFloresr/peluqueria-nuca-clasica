@@ -1,0 +1,33 @@
+{
+  "orden": 10,
+  "nombre": "Corte para rizos",
+  "largo": "medio",
+  "cabello": [
+    "rizado",
+    "ondulado"
+  ],
+  "rostros": [
+    "ovalado",
+    "redondo",
+    "cuadrado",
+    "alargado",
+    "corazon"
+  ],
+  "mantenimiento": 10,
+  "duracion": 60,
+  "desde": 40,
+  "servicio": "corte-mujer",
+  "ilustracion": "rizos",
+  "resumen": "Se corta en seco, rizo a rizo, para que cada uno caiga en su sitio y se defina mejor.",
+  "queEs": "Cortar el rizo en seco permite ver la forma real de cada mechón y darle el largo correcto, porque el pelo rizado cambia de altura al secarse. El resultado es un volumen más equilibrado y rizos más definidos.",
+  "comoPedirlo": [
+    "Ven con el pelo limpio y seco o con tu rutina habitual.",
+    "Cuéntanos qué te molesta: volumen en los lados, puntas abiertas, falta de definición.",
+    "Di cuánto largo quieres perder, y si aceptas un corte por capas."
+  ],
+  "enCasa": [
+    "Hidrata con una crema para rizos y no los cepilles en seco.",
+    "Seca con difusor o al aire, sin tocarlos.",
+    "Espacia la visita hasta diez semanas, según el crecimiento."
+  ]
+}

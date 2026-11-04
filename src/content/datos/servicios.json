@@ -1,0 +1,23 @@
+[
+  { "id": "corte-mujer", "orden": 1, "nombre": "Corte de mujer", "categoria": "corte", "duracion": 50, "precio": 32, "descripcion": "Lavado, corte y secado." },
+  { "id": "corte-hombre", "orden": 2, "nombre": "Corte de hombre", "categoria": "corte", "duracion": 30, "precio": 18, "descripcion": "Corte a tijera o máquina, con lavado." },
+  { "id": "degradado", "orden": 3, "nombre": "Degradado", "categoria": "corte", "duracion": 40, "precio": 22, "descripcion": "Degradado a máquina con acabado a navaja." },
+  { "id": "corte-infantil", "orden": 4, "nombre": "Corte infantil", "categoria": "corte", "duracion": 25, "precio": 13, "descripcion": "Hasta 12 años. Con paciencia y sin prisas." },
+  { "id": "flequillo", "orden": 5, "nombre": "Retoque de flequillo", "categoria": "corte", "duracion": 10, "precio": 6, "descripcion": "Entre visitas, sin cita larga." },
+
+  { "id": "barba", "orden": 6, "nombre": "Arreglo de barba", "categoria": "barberia", "duracion": 20, "precio": 10, "descripcion": "Perfilado y recorte con toalla caliente." },
+  { "id": "corte-barba", "orden": 7, "nombre": "Corte y barba", "categoria": "barberia", "duracion": 50, "precio": 27, "descripcion": "El corte que elijas más el arreglo de barba." },
+
+  { "id": "color-raiz", "orden": 8, "nombre": "Color de raíz", "categoria": "color", "duracion": 75, "precio": 38, "desde": true, "descripcion": "Retoque de la raíz con el tono que ya llevas." },
+  { "id": "color-completo", "orden": 9, "nombre": "Color completo", "categoria": "color", "duracion": 90, "precio": 55, "desde": true, "descripcion": "Del cuero cabelludo a las puntas. El precio depende de la longitud." },
+  { "id": "mechas", "orden": 10, "nombre": "Mechas o balayage", "categoria": "color", "duracion": 150, "precio": 95, "desde": true, "descripcion": "Aclarado a medida. Te hacemos una consulta antes." },
+  { "id": "matiz", "orden": 11, "nombre": "Matiz o tono", "categoria": "color", "duracion": 40, "precio": 28, "descripcion": "Para corregir o refrescar el color entre visitas." },
+
+  { "id": "hidratante", "orden": 12, "nombre": "Tratamiento hidratante", "categoria": "tratamientos", "duracion": 30, "precio": 22, "descripcion": "Para cabellos secos o castigados." },
+  { "id": "mascarilla", "orden": 13, "nombre": "Mascarilla reparadora", "categoria": "tratamientos", "duracion": 20, "precio": 12, "descripcion": "Se añade a cualquier servicio." },
+  { "id": "keratina", "orden": 14, "nombre": "Alisado de keratina", "categoria": "tratamientos", "duracion": 120, "precio": 110, "desde": true, "descripcion": "Reduce el encrespamiento durante semanas. Hacemos una prueba antes." },
+
+  { "id": "peinado", "orden": 15, "nombre": "Lavado y peinado", "categoria": "peinado", "duracion": 40, "precio": 20, "descripcion": "Con secador o plancha." },
+  { "id": "ondas", "orden": 16, "nombre": "Peinado con ondas", "categoria": "peinado", "duracion": 45, "precio": 28, "descripcion": "Ondas suaves o marcadas, para salir." },
+  { "id": "recogido", "orden": 17, "nombre": "Recogido para evento", "categoria": "peinado", "duracion": 60, "precio": 45, "desde": true, "descripcion": "Bodas y celebraciones. Conviene hacer una prueba." }
+]

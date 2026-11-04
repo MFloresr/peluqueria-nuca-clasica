@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import Ilustracion from '../../components/Ilustracion.astro';
+import TarjetaCorte from '../../components/TarjetaCorte.astro';
+import { getCortes } from '../../lib/contenido';
+import { euros, duracion, semanas, NOMBRE_LARGO, NOMBRE_CABELLO, NOMBRE_ROSTRO } from '../../lib/util';
+
+export async function getStaticPaths() {
+  const cortes = await getCortes();
+  return cortes.map((corte) => ({ params: { slug: corte.id }, props: { corte } }));
+}
+const { corte } = Astro.props;
+const d = corte.data;
+const otros = (await getCortes()).filter((c) => c.id !== corte.id && (c.data.largo === d.largo || c.data.cabello.some((x) => d.cabello.includes(x)))).slice(0, 3);
+---
+
+<Base titulo={`${d.nombre}: cómo es y cómo pedirlo`} descripcion={`${d.nombre}: ${d.resumen}`}>
+  <div class="contenedor">
+    <nav class="migas" aria-label="Migas de pan"><a href="/">Inicio</a> / <a href="/cortes/">Cortes</a> / <span aria-current="page">{d.nombre}</span></nav>
+    <div class="corte-ficha">
+      <div class="corte-ficha__ilus"><Ilustracion id={d.ilustracion} etiqueta={`Ilustración del corte ${d.nombre}`} /></div>
+      <div>
+        <header style="padding-top:8px">
+          <h1 style="font-size:clamp(2.5rem,6vw,4.4rem)">{d.nombre}</h1>
+          <p style="font-size:1.25rem;color:var(--tinta-2);max-width:48ch">{d.resumen}</p>
+        </header>
+
+        <dl class="datos">
+          <div class="dato"><dt>Largo</dt><dd>{NOMBRE_LARGO[d.largo]}</dd></div>
+          <div class="dato"><dt>Retoque</dt><dd>{semanas(d.mantenimiento)}</dd></div>
+          <div class="dato"><dt>Duración</dt><dd class="num">{duracion(d.duracion)}</dd></div>
+          <div class="dato"><dt>Precio</dt><dd class="num">Desde {euros(d.desde)}</dd></div>
+        </dl>
+
+        <h2 style="font-size:1.7rem">Qué es</h2>
+        <p class="texto">{d.queEs}</p>
+
+        <h2 style="font-size:1.7rem;margin-top:1.2em">Con qué cabello funciona</h2>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">{d.cabello.map((c) => <span class="etiqueta">{NOMBRE_CABELLO[c]}</span>)}</div>
+        <p class="letra-pequena" style="max-width:60ch">Suele favorecer a rostros {d.rostros.map((r) => NOMBRE_ROSTRO[r].toLowerCase()).join(', ')}. Es una orientación general: lo que mejor te sienta depende de ti, y en la consulta lo vemos juntos.</p>
+
+        <h2 style="font-size:1.7rem;margin-top:1.2em">Cómo pedirlo</h2>
+        <ul class="lista">{d.comoPedirlo.map((c) => <li>{c}</li>)}</ul>
+
+        <h2 style="font-size:1.7rem;margin-top:1.2em">En casa</h2>
+        <ul class="lista">{d.enCasa.map((c) => <li>{c}</li>)}</ul>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+          <a class="btn" href={`/cita/?servicio=${d.servicio}`}>Pedir cita para este corte</a>
+          <a class="btn btn--sec" href="/cortes/">Ver otros cortes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="cabecera-seccion"><h2>Otros cortes parecidos</h2></div>
+      <div class="rejilla">{otros.map((c) => <TarjetaCorte corte={c} />)}</div>
+    </div>
+  </section>
+</Base>

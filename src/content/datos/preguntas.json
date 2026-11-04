@@ -1,0 +1,11 @@
+[
+  { "id": "q1", "tema": "citas", "pregunta": "¿Puedo cambiar o cancelar mi cita?", "respuesta": "Sí. Avísanos al menos 24 horas antes por teléfono o WhatsApp para que otra persona pueda aprovechar la hora. Si no avisas y no vienes, podemos pedirte que confirmes tu próxima cita con antelación." },
+  { "id": "q2", "tema": "citas", "pregunta": "¿Qué pasa si llego tarde?", "respuesta": "Avísanos. Si podemos, te atendemos igual; si no, ajustamos el servicio al tiempo que quede para no retrasar a quien viene después." },
+  { "id": "q3", "tema": "citas", "pregunta": "¿Cuánto dura mi cita?", "respuesta": "Depende de lo que reserves. En la reserva te mostramos la duración total antes de confirmar. Si dudas entre dos servicios, elige el más largo: es mejor que sobre tiempo." },
+  { "id": "q4", "tema": "cortes", "pregunta": "¿Cada cuánto debo cortarme el pelo?", "respuesta": "Depende del corte. Un degradado necesita retoque cada tres o cuatro semanas; un bob, cada seis a ocho; el pelo largo, cada dos o tres meses. En la guía de cortes tienes el tiempo recomendado de cada uno." },
+  { "id": "q5", "tema": "cortes", "pregunta": "No sé qué corte me va, ¿me aconsejáis?", "respuesta": "Sí. Prueba la guía «¿Qué corte me va?» y, en la peluquería, cuéntanos cuánto tiempo quieres dedicarle por la mañana. Te diremos con sinceridad qué es posible con tu tipo de cabello." },
+  { "id": "q6", "tema": "cortes", "pregunta": "¿Puedo llevar una foto?", "respuesta": "Claro, ayuda mucho. Te diremos con franqueza si se puede conseguir con tu tipo de cabello, su densidad y su ondulación, y qué se puede adaptar." },
+  { "id": "q7", "tema": "color", "pregunta": "¿Hacéis una prueba antes de teñir?", "respuesta": "Sí. Antes de un color nuevo o de un alisado hacemos una prueba de sensibilidad en la piel, como indica el fabricante, y una consulta para ver el estado de tu cabello." },
+  { "id": "q8", "tema": "color", "pregunta": "¿Cuánto cuestan las mechas o el balayage?", "respuesta": "Depende de la longitud y de lo que quieras conseguir. Por eso indicamos un precio «desde». Te damos el precio final en la consulta, antes de empezar." },
+  { "id": "q9", "tema": "bono", "pregunta": "¿Cuánto dura un bono regalo?", "respuesta": "Seis meses desde que se compra, y se puede usar en cualquier servicio. [El cliente confirma la caducidad.]" }
+]

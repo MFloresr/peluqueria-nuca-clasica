@@ -1,0 +1,162 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Ilustracion from '../components/Ilustracion.astro';
+import TarjetaCorte from '../components/TarjetaCorte.astro';
+import AbiertoAhora from '../components/AbiertoAhora.astro';
+import { getCortes, getEntradas, getEquipo, getOpiniones, getServicios } from '../lib/contenido';
+import { sitio } from '../lib/sitio';
+import { euros, duracion, NOMBRE_CATEGORIA } from '../lib/util';
+import barberia from '../assets/fotos/barberia-palma.jpg';
+import herramientas from '../assets/fotos/herramientas-cinturon.jpg';
+
+const cortes = await getCortes();
+const servicios = await getServicios();
+const entradas = (await getEntradas()).slice(0, 3);
+const equipo = await getEquipo();
+const opiniones = await getOpiniones();
+const populares = servicios.filter((s) => ['corte-mujer', 'degradado', 'color-raiz', 'corte-barba'].includes(s.id));
+const iniciales = (n: string) => n.split(' ').map((p) => p[0]).join('');
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'HairSalon',
+  name: sitio.nombre,
+  description: sitio.descripcion,
+  url: sitio.url,
+  telephone: sitio.telefono,
+  email: sitio.email,
+  address: { '@type': 'PostalAddress', streetAddress: sitio.direccion.calle, postalCode: sitio.direccion.cp, addressLocality: sitio.direccion.ciudad, addressRegion: sitio.direccion.provincia, addressCountry: 'ES' },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '10:00', closes: '20:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '09:30', closes: '15:00' },
+  ],
+};
+---
+
+<Base titulo="Peluquería y barbería con cita online" jsonld={jsonld}>
+  <section class="hero" aria-labelledby="titulo-hero">
+    <div class="contenedor hero__fila">
+      <div class="hero__texto">
+        <h1 id="titulo-hero">Tu pelo, a tu manera.</h1>
+        <p>Elige un corte, tu profesional y tu hora. Pide cita en un minuto, sin llamadas. Y si no sabes qué corte te va, te ayudamos a decidir.</p>
+        <div class="hero__acciones">
+          <a class="btn" href="/cita/">Pedir cita</a>
+          <a class="btn btn--sec" href="/que-corte-me-va/">¿Qué corte me va?</a>
+        </div>
+        <div class="tonos hero__tonos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="hero__cortes">
+        <a href="/cortes/degradado/" aria-label="Ver el corte degradado"><Ilustracion id="degradado" /></a>
+        <a href="/cortes/bob/" aria-label="Ver el corte bob"><Ilustracion id="bob" /></a>
+        <a href="/cortes/rizos/" aria-label="Ver el corte para rizos"><Ilustracion id="rizos" /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-cortes">
+    <div class="contenedor">
+      <div class="cabecera-seccion"><h2 id="t-cortes">Cortes</h2><a class="enlace" href="/cortes/">Ver los {cortes.length} cortes</a></div>
+      <div class="rejilla">{cortes.slice(0, 4).map((c) => <TarjetaCorte corte={c} />)}</div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--blanca" aria-labelledby="t-cita">
+    <div class="contenedor dos dos--desigual">
+      <div>
+        <h2 id="t-cita">Pide cita en cuatro pasos</h2>
+        <ol class="lista" style="counter-reset:p">
+          <li><strong>Elige tus servicios.</strong> Ves el precio y el tiempo al momento.</li>
+          <li><strong>Elige profesional,</strong> o deja que te asignemos el primero libre.</li>
+          <li><strong>Elige día y hora</strong> entre las que hay libres.</li>
+          <li><strong>Déjanos tus datos.</strong> Te confirmamos por teléfono o mensaje.</li>
+        </ol>
+        <a class="btn" href="/cita/">Empezar</a>
+      </div>
+      <div class="foto-recta"><Image src={barberia} alt="Interior de una barbería clásica con sillón rojo, espejos y lámparas" widths={[500, 800, 1100]} sizes="(min-width: 900px) 40vw, 100vw" /></div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-serv">
+    <div class="contenedor">
+      <div class="cabecera-seccion"><h2 id="t-serv">Lo que más piden</h2><a class="enlace" href="/servicios/">Todos los servicios y precios</a></div>
+      <div class="rejilla">
+        {populares.map((s) => (
+          <article class="corte" style="padding:22px">
+            <span class="etiqueta etiqueta--cobre" style="align-self:flex-start">{NOMBRE_CATEGORIA[s.data.categoria]}</span>
+            <h3 style="margin-top:12px">{s.data.nombre}</h3>
+            <p>{s.data.descripcion}</p>
+            <div class="corte__pie"><span class="num">{s.data.desde ? 'Desde ' : ''}{euros(s.data.precio)}</span><span class="gris num">{duracion(s.data.duracion)}</span></div>
+            <a class="btn btn--sec btn--peq" style="margin-top:14px" href={`/cita/?servicio=${s.id}`}>Reservar</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--oscura peque peine" aria-labelledby="t-equipo">
+    <div class="contenedor">
+      <div class="cabecera-seccion"><h2 id="t-equipo">El equipo</h2><a class="enlace" style="color:#fff" href="/equipo/">Conócelos</a></div>
+      <div class="equipo">
+        {equipo.map((p) => (
+          <article class="persona" style="background:#223329;border-color:#2f4237;color:#efe7d6">
+            <span class="persona__iniciales" aria-hidden="true">{iniciales(p.data.nombre)}</span>
+            <h3>{p.data.nombre}</h3>
+            <p class="cargo" style="color:var(--cobre)">{p.data.cargo} · {p.data.especialidad}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-bono">
+    <div class="contenedor dos">
+      <div class="bono">
+        <h2 id="t-bono">Regala una cita</h2>
+        <p class="importe num">{euros(30)}</p>
+        <p style="max-width:34ch">Un bono regalo para cualquier servicio. Se envía por correo o se recoge impreso en el salón.</p>
+        <a class="btn btn--claro" href="/bono-regalo/">Ver el bono</a>
+      </div>
+      <div class="foto-recta"><Image src={herramientas} alt="Funda de cuero con tijeras y peines de peluquero" widths={[500, 800]} sizes="(min-width: 900px) 40vw, 100vw" style="aspect-ratio:4/3" /></div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--ceniza" aria-labelledby="t-opiniones">
+    <div class="contenedor">
+      <div class="cabecera-seccion"><h2 id="t-opiniones">Lo que cuentan</h2></div>
+      <div class="opiniones">{opiniones.map((o) => <figure class="opinion"><blockquote>“{o.data.texto}”</blockquote><figcaption><strong>{o.data.nombre}</strong>{o.data.servicio}</figcaption></figure>)}</div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-consejos">
+    <div class="contenedor">
+      <div class="cabecera-seccion"><h2 id="t-consejos">Consejos</h2><a class="enlace" href="/consejos/">Ver todos</a></div>
+      <div class="entradas">
+        {entradas.map((e) => (
+          <article class="entrada">
+            <Image src={e.data.foto} alt={e.data.fotoAlt} widths={[400, 700]} sizes="(min-width: 960px) 30vw, 100vw" />
+            <div class="entrada__cuerpo"><p class="entrada__meta">{e.data.categoria} · {e.data.minutos} min</p><h3><a href={`/consejos/${e.id}/`}>{e.data.titulo}</a></h3><p>{e.data.resumen}</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--blanca" aria-labelledby="t-donde">
+    <div class="contenedor dos">
+      <div>
+        <h2 id="t-donde">Dónde y cuándo</h2>
+        <p><AbiertoAhora /></p>
+        <p>{sitio.direccion.calle}<br />{sitio.direccion.cp} {sitio.direccion.ciudad} ({sitio.direccion.provincia})</p>
+        <p>Teléfono: <a class="enlace" href={`tel:${sitio.telefono}`}>{sitio.telefonoVisible}</a></p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="/cita/">Pedir cita</a><a class="btn btn--sec" href="/contacto/">Cómo llegar</a></div>
+      </div>
+      <div class="tabla-envoltorio">
+        <table>
+          <caption class="solo-lectores">Horario de la peluquería</caption>
+          <thead><tr><th scope="col">Día</th><th scope="col">Horario</th></tr></thead>
+          <tbody>{sitio.horarios.map((h) => <tr><th scope="row">{h.etiqueta}</th><td class="num">{h.tramos.length ? h.tramos.map((t) => `${t.abre} a ${t.cierra}`).join(' y ') : 'Cerrado'}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Base>

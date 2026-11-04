@@ -1,0 +1,33 @@
+{
+  "orden": 9,
+  "nombre": "Flequillo cortina",
+  "largo": "largo",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "fino"
+  ],
+  "rostros": [
+    "ovalado",
+    "alargado",
+    "cuadrado",
+    "corazon"
+  ],
+  "mantenimiento": 8,
+  "duracion": 55,
+  "desde": 38,
+  "servicio": "corte-mujer",
+  "ilustracion": "cortina",
+  "resumen": "Flequillo abierto por el centro que cae a ambos lados de la cara, sobre pelo largo con capas.",
+  "queEs": "El flequillo cortina se separa en el centro de la frente y cae hacia los lados, enmarcando la cara. Es más fácil de crecer y de llevar que un flequillo recto, y combina bien con el pelo largo.",
+  "comoPedirlo": [
+    "Pide «flequillo cortina» y hasta dónde llega: «a los pómulos» o «a la barbilla».",
+    "Di si lo quieres más corto o más largo en el centro.",
+    "Cuéntanos si llevas la raya al medio habitualmente."
+  ],
+  "enCasa": [
+    "Se seca con secador y cepillo redondo, hacia fuera.",
+    "Si se engrasa, lávalo aparte entre lavados.",
+    "Pide el retoque de flequillo entre visitas: es rápido."
+  ]
+}

@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import TarjetaCorte from '../../components/TarjetaCorte.astro';
+import { getCortes } from '../../lib/contenido';
+import { LARGOS, CABELLOS } from '../../content.config';
+import { NOMBRE_LARGO, NOMBRE_CABELLO } from '../../lib/util';
+
+const cortes = await getCortes();
+---
+
+<Base titulo="Guía de cortes de pelo" descripcion="Diez cortes explicados: qué son, para qué pelo funcionan, cada cuánto hay que retocarlos y cómo pedirlos. Filtra por largo y tipo de cabello.">
+  <div class="contenedor cabecera-pagina">
+    <h1>Cortes</h1>
+    <p>Diez cortes explicados sin jerga: cómo son, con qué tipo de pelo funcionan y cada cuánto hay que retocarlos.</p>
+  </div>
+  <section class="seccion" style="padding-top:16px">
+    <div class="contenedor">
+      <form class="filtros" id="filtros" onsubmit="return false" aria-label="Filtros de cortes">
+        <fieldset>
+          <legend>Largo</legend>
+          <div class="chips">{LARGOS.map((l) => <label><input type="checkbox" name="largo" value={l} /><span>{NOMBRE_LARGO[l]}</span></label>)}</div>
+        </fieldset>
+        <fieldset>
+          <legend>Mi cabello</legend>
+          <div class="chips">{CABELLOS.map((c) => <label><input type="checkbox" name="cabello" value={c} /><span>{NOMBRE_CABELLO[c]}</span></label>)}</div>
+        </fieldset>
+        <fieldset>
+          <legend>Retoque máximo</legend>
+          <div class="chips">
+            <label><input type="radio" name="mant" value="" checked /><span>Cualquiera</span></label>
+            <label><input type="radio" name="mant" value="5" /><span>Hasta 5 semanas</span></label>
+            <label><input type="radio" name="mant" value="8" /><span>Hasta 8 semanas</span></label>
+          </div>
+        </fieldset>
+      </form>
+      <p id="resultados" role="status" aria-live="polite" style="font-weight:700;margin:0 0 14px"></p>
+      <h2 class="solo-lectores">Todos los cortes</h2>
+      <div class="rejilla" id="lista">{cortes.map((c) => <TarjetaCorte corte={c} />)}</div>
+      <div class="vacio" id="vacio" hidden>
+        <h2 style="font-size:1.6rem">Ningún corte con esos filtros</h2>
+        <p>Prueba a quitar alguno, o pregúntanos: casi siempre hay una versión que funciona con tu pelo.</p>
+        <a class="btn" href="/que-corte-me-va/">Prueba el cuestionario</a>
+      </div>
+    </div>
+  </section>
+  <section class="cinta"><div class="contenedor"><h2>¿Dudas entre dos? Pídenos consejo antes de cortar.</h2><a class="btn" href="/cita/">Pedir cita</a></div></section>
+</Base>
+
+<script>
+  const form = document.getElementById('filtros') as HTMLFormElement;
+  const tarjetas = [...document.querySelectorAll<HTMLElement>('[data-corte]')];
+  const marcados = (n: string) => [...form.querySelectorAll<HTMLInputElement>(`input[name="${n}"]:checked`)].map((i) => i.value);
+  const aplicar = () => {
+    const largos = marcados('largo'), cabellos = marcados('cabello');
+    const mant = Number(form.querySelector<HTMLInputElement>('input[name="mant"]:checked')?.value || 0);
+    let n = 0;
+    for (const t of tarjetas) {
+      const aptos = (t.dataset.cabello || '').split(' ');
+      const ok = (!largos.length || largos.includes(t.dataset.largo!)) && (!cabellos.length || cabellos.some((c) => aptos.includes(c))) && (!mant || Number(t.dataset.mant) <= mant);
+      t.hidden = !ok; if (ok) n++;
+    }
+    document.getElementById('resultados')!.textContent = n === 1 ? '1 corte' : `${n} cortes`;
+    (document.getElementById('vacio') as HTMLElement).hidden = n !== 0;
+    const q = new URLSearchParams(); largos.forEach((l) => q.append('largo', l)); cabellos.forEach((c) => q.append('cabello', c)); if (mant) q.set('mant', String(mant));
+    history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname);
+  };
+  const q = new URLSearchParams(location.search);
+  q.getAll('largo').forEach((v) => { const i = form.querySelector<HTMLInputElement>(`input[name="largo"][value="${v}"]`); if (i) i.checked = true; });
+  q.getAll('cabello').forEach((v) => { const i = form.querySelector<HTMLInputElement>(`input[name="cabello"][value="${v}"]`); if (i) i.checked = true; });
+  if (q.get('mant')) { const i = form.querySelector<HTMLInputElement>(`input[name="mant"][value="${q.get('mant')}"]`); if (i) i.checked = true; }
+  form.addEventListener('input', aplicar);
+  aplicar();
+</script>

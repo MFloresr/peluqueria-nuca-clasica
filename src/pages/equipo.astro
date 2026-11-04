@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { getEquipo } from '../lib/contenido';
+import { NOMBRE_CATEGORIA } from '../lib/util';
+import peines from '../assets/fotos/peines.jpg';
+
+const equipo = await getEquipo();
+const iniciales = (n: string) => n.split(' ').map((p) => p[0]).join('');
+---
+
+<Base titulo="El equipo" descripcion="Estilistas y barbero de Nuca: especialidades y cómo trabajan.">
+  <div class="contenedor cabecera-pagina">
+    <h1>El equipo</h1>
+    <p>Cuatro profesionales con una forma de trabajar común: escuchar primero, cortar después.</p>
+  </div>
+  <section class="seccion" style="padding-top:20px">
+    <div class="contenedor">
+      <div class="equipo">
+        {equipo.map((p) => (
+          <article class="persona">
+            <span class="persona__iniciales" aria-hidden="true">{iniciales(p.data.nombre)}</span>
+            <h2 style="font-size:1.5rem;margin-bottom:2px">{p.data.nombre}</h2>
+            <p class="cargo">{p.data.cargo} · {p.data.especialidad}</p>
+            <p>{p.data.texto}</p>
+            <p class="letra-pequena" style="margin-bottom:12px">Hace: {p.data.categorias.map((c) => NOMBRE_CATEGORIA[c].toLowerCase()).join(', ')}.</p>
+            <a class="btn btn--sec btn--peq" href="/cita/">Pedir cita</a>
+          </article>
+        ))}
+      </div>
+      <p class="letra-pequena" style="margin-top:18px">Los nombres y perfiles de esta página son de ejemplo y los sustituye el cliente con los de su equipo real.</p>
+    </div>
+  </section>
+  <section class="seccion seccion--blanca">
+    <div class="contenedor dos">
+      <div>
+        <h2>Cómo trabajamos</h2>
+        <ul class="lista">
+          <li>Empezamos hablando: qué quieres, cómo es tu rutina y qué te molesta de tu pelo.</li>
+          <li>Te decimos con franqueza qué es posible con tu tipo de cabello.</li>
+          <li>Te explicamos cómo peinarlo en casa antes de que te levantes del sillón.</li>
+          <li>Te damos el precio antes de empezar, sobre todo en el color.</li>
+        </ul>
+      </div>
+      <div class="foto-recta"><Image src={peines} alt="Tres peines de madera con mango curvo colocados en una caja" widths={[500, 800]} sizes="(min-width: 900px) 40vw, 100vw" style="aspect-ratio:4/3" /></div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,32 @@
+{
+  "orden": 3,
+  "nombre": "Tupé",
+  "largo": "medio",
+  "cabello": [
+    "liso",
+    "ondulado",
+    "grueso"
+  ],
+  "rostros": [
+    "ovalado",
+    "cuadrado",
+    "alargado"
+  ],
+  "mantenimiento": 4,
+  "duracion": 45,
+  "desde": 24,
+  "servicio": "corte-hombre",
+  "ilustracion": "tupe",
+  "resumen": "Largo y volumen arriba, lados cortos. Un corte con presencia que se peina hacia atrás o hacia un lado.",
+  "queEs": "El tupé deja el pelo de la parte delantera más largo y lo peina hacia arriba y hacia atrás, con volumen. Los lados se llevan cortos o degradados para que el contraste destaque.",
+  "comoPedirlo": [
+    "Pide «tupé con lados degradados».",
+    "Indica cuánto largo quieres arriba, normalmente entre 6 y 10 cm.",
+    "Di si prefieres un acabado natural o muy marcado."
+  ],
+  "enCasa": [
+    "Seca el pelo con secador hacia arriba y hacia atrás, con un cepillo.",
+    "Fija con una pasta o cera de agarre medio.",
+    "Necesita algo de tiempo cada mañana: cuéntanos cuánto quieres dedicarle."
+  ]
+}
